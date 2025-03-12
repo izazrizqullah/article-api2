@@ -1,0 +1,39 @@
+npm init -y
+npm i express dotenv typeorm pg reflect-metadata morgan
+npm install --save-dev @babel/core @babel/cli @babel/preset-env @babel/plugin-proposal-decorators
+touch .gitignore .env .env.example
+npm i bcryptjs jsonwebtoken nodemailer
+npm i --save-dev nodemon
+
+npm install passport passport-google-oauth20 express-session
+
+
+
+vercel
+
+vercel.json
+
+{
+"version": 2,
+"builds": [
+{
+"src": "./index.js",
+"use": "@vercel/node"
+}
+],
+"routes": [
+{
+"src": "/(.*)",
+"dest": "/"
+}
+]
+}
+
+
+npx typeorm migration:create src/migrations/InitMigration
+
+npx typeorm migration:generate src/migrations/InitMigration -d src/config/database.js
+
+npx typeorm migration:run -d src/config/database.js
+
+npx typeorm migration:revert -d src/config/database.js
